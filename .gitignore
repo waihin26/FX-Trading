@@ -1,0 +1,28 @@
+# Create .gitignore file
+cat > .gitignore << 'EOF'
+# Environment variables (NEVER commit this)
+.env
+
+# API keys and secrets
+*.key
+secrets.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Data files (optional)
+data/*.csv
+EOF

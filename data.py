@@ -3,6 +3,10 @@ import pandas as pd
 from datetime import datetime
 import os
 import time
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def fetch_usdjpy_data(api_key, save_to_csv=True):
     """
@@ -110,20 +114,16 @@ def load_usdjpy_data(filename='data/USDJPY_daily_alphavantage.csv'):
         return None
 
 if __name__ == "__main__":
-    # IMPORTANT: Replace 'YOUR_API_KEY' with your actual Alpha Vantage API key
-    # Get free API key at: https://www.alphavantage.co/support/#api-key
+    # Load API key from .env file (SECURE METHOD)
+    API_KEY = os.getenv('ALPHAVANTAGE_API_KEY')
     
-    API_KEY = 'YOUR_API_KEY'  # <-- PUT YOUR API KEY HERE
-    
-    if API_KEY == 'YOUR_API_KEY':
+    if API_KEY is None:
         print("=" * 60)
-        print("ERROR: Please set your Alpha Vantage API key!")
+        print("ERROR: API key not found!")
         print("=" * 60)
-        print("\nSteps:")
-        print("1. Go to: https://www.alphavantage.co/support/#api-key")
-        print("2. Get your free API key")
-        print("3. Replace 'YOUR_API_KEY' in this file with your actual key")
-        print("4. Run the script again")
+        print("\nCreate a .env file with:")
+        print("ALPHAVANTAGE_API_KEY=your_api_key_here")
+        print("=" * 60)
     else:
         # Fetch and save USD/JPY data
         df = fetch_usdjpy_data(api_key=API_KEY, save_to_csv=True)
